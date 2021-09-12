@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExpenseDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AddExpense">
+    <Key>
+      <PropertyRef Name="expenseId" />
+    </Key>
+    <Property Name="expenseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="expenseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="expensePrice" Type="int" />
+    <Property Name="expenseDate" Type="date" />
+    <Property Name="expenseAim" Type="nvarchar(max)" />
+    <Property Name="userId" Type="int" />
+  </EntityType>
+  <EntityType Name="LogData">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Name="AuditId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="AreaAccssed" Type="nvarchar" MaxLength="50" />
+    <Property Name="Timestamp" Type="datetime" />
+    <Property Name="Browser" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="int" />
+  </EntityType>
+  <Association Name="FK_AddExpense_AddExpense">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AddExpense" Type="Self.AddExpense" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="AddExpense">
+        <PropertyRef Name="expenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ExpenseDataModelStoreContainer">
+    <EntitySet Name="AddExpense" EntityType="Self.AddExpense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LogData" EntityType="Self.LogData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AddExpense_AddExpense" Association="Self.FK_AddExpense_AddExpense">
+      <End Role="User" EntitySet="User" />
+      <End Role="AddExpense" EntitySet="AddExpense" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

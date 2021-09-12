@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExpenseAppDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AddExpense">
+    <Key>
+      <PropertyRef Name="expenseId" />
+    </Key>
+    <Property Name="expenseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="expenseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expensePrice" Type="Int32" />
+    <Property Name="expenseDate" Type="DateTime" Precision="0" />
+    <Property Name="expenseAim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AddExpense_User" FromRole="AddExpense" ToRole="User" />
+  </EntityType>
+  <EntityType Name="LogData">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Name="AuditId" Type="Guid" Nullable="false" />
+    <Property Name="UserNameId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AreaAccessed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Timestamp" Type="DateTime" Precision="3" />
+    <Property Name="Browser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="Int32" />
+    <NavigationProperty Name="AddExpense" Relationship="Self.FK_AddExpense_User" FromRole="User" ToRole="AddExpense" />
+  </EntityType>
+  <Association Name="FK_AddExpense_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AddExpense" Type="Self.AddExpense" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="AddExpense">
+        <PropertyRef Name="expenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ExpenseAppEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AddExpense" EntityType="Self.AddExpense" />
+    <EntitySet Name="LogData" EntityType="Self.LogData" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_AddExpense_User" Association="Self.FK_AddExpense_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="AddExpense" EntitySet="AddExpense" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

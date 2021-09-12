@@ -1,0 +1,52 @@
+﻿@model ExpenseApplication.Models.User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <title>Login</title>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm("Login", "Security", FormMethod.Post))
+        {
+            <fieldset>
+                <legend>Login</legend>
+                <div class="well bs-component live-less-editor-hovercontainer" data-relatedvars="legend-color,legend-border-color,input-color,input-height-base,input-bg,input-border,
+             input-border-radius,input-border-focus,input-color-placeholder,input-bg-disabled,input-height-small,input-height-large,state-success-text,state-success-bg,state-warning-text,
+             state-warning-bg,state-danger-text,state-danger-bg,input-group-addon-bg,input-group-addon-border-color,input-border-radius-large,input-border-radius-small">
+                    <form class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="textArea" class="col-lg-2 control-label" style="font-size:large">Username</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="usernameinput" placeholder="Username" name="userName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="textArea" class="col-lg-2 control-label" style="font-size:large">Password</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" id="passwordinput" placeholder="Password" name="password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </fieldset>
+            @ViewBag.Mesaj
+        }
+    </div> 
+</body>
+</html>

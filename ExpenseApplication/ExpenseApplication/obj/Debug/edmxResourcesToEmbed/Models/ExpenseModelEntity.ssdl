@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExpenseDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ExpenseInfo">
+    <Key>
+      <PropertyRef Name="expenseId" />
+    </Key>
+    <Property Name="expenseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="expenseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="expensePrice" Type="int" />
+    <Property Name="expenseDate" Type="date" />
+    <Property Name="expenseAim" Type="nvarchar(max)" />
+    <Property Name="userId" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" />
+    <Property Name="userpassword" Type="int" />
+  </EntityType>
+  <Association Name="FK_ExpenseInfo_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="ExpenseInfo" Type="Self.ExpenseInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="ExpenseInfo">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ExpenseDataModelStoreContainer">
+    <EntitySet Name="ExpenseInfo" EntityType="Self.ExpenseInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ExpenseInfo_User" Association="Self.FK_ExpenseInfo_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ExpenseInfo" EntitySet="ExpenseInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

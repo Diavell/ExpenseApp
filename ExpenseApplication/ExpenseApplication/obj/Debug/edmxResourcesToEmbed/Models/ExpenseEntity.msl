@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExpenseDataModelStoreContainer" CdmEntityContainer="ExpenseDataEntities7">
+    <EntitySetMapping Name="AddExpense">
+      <EntityTypeMapping TypeName="ExpenseDataModel.AddExpense">
+        <MappingFragment StoreEntitySet="AddExpense">
+          <ScalarProperty Name="expenseCurrency" ColumnName="expenseCurrency" />
+          <ScalarProperty Name="approvalInfo" ColumnName="approvalInfo" />
+          <ScalarProperty Name="expenseApproval" ColumnName="expenseApproval" />
+          <ScalarProperty Name="expenseId" ColumnName="expenseId" />
+          <ScalarProperty Name="expenseName" ColumnName="expenseName" />
+          <ScalarProperty Name="expensePrice" ColumnName="expensePrice" />
+          <ScalarProperty Name="expenseDate" ColumnName="expenseDate" />
+          <ScalarProperty Name="expenseAim" ColumnName="expenseAim" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogData">
+      <EntityTypeMapping TypeName="ExpenseDataModel.LogData">
+        <MappingFragment StoreEntitySet="LogData">
+          <ScalarProperty Name="AuditId" ColumnName="AuditId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="AreaAccssed" ColumnName="AreaAccssed" />
+          <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+          <ScalarProperty Name="Browser" ColumnName="Browser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="ExpenseDataModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="rolesId" ColumnName="rolesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

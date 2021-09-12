@@ -1,0 +1,71 @@
+﻿@model IEnumerable<ExpenseApplication.Models.AddExpense>
+
+@{
+    ViewBag.Title = "ManagerList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManagerList</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.expenseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expensePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expenseCurrency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expenseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expenseAim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expenseApproval)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.approvalInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.userName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.expenseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expensePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expenseCurrency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expenseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expenseAim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expenseApproval)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.approvalInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.userName)
+        </td>
+        <td>
+            @Html.ActionLink("Approval", "Appvoral", new { id = item.expenseId }) |
+            @Html.ActionLink("DisApproval", "Edit", new { id = item.expenseId })
+        </td>
+    </tr>
+}
+</table>

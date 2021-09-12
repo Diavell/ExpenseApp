@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExpenseDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ExpenseInfo">
+    <Key>
+      <PropertyRef Name="expenseId" />
+    </Key>
+    <Property Name="expenseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="expenseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="expensePrice" Type="Int32" />
+    <Property Name="expenseDate" Type="DateTime" Precision="0" />
+    <Property Name="expenseAim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_ExpenseInfo_User" FromRole="ExpenseInfo" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="Int32" Nullable="false" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userpassword" Type="Int32" />
+    <NavigationProperty Name="ExpenseInfo" Relationship="Self.FK_ExpenseInfo_User" FromRole="User" ToRole="ExpenseInfo" />
+  </EntityType>
+  <Association Name="FK_ExpenseInfo_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="ExpenseInfo" Type="Self.ExpenseInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="ExpenseInfo">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ExpenseDataEntities5" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ExpenseInfo" EntityType="Self.ExpenseInfo" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_ExpenseInfo_User" Association="Self.FK_ExpenseInfo_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ExpenseInfo" EntitySet="ExpenseInfo" />
+    </AssociationSet>
+    <EntitySet Name="LogDataSet" EntityType="ExpenseDataModel.LogData" />
+  </EntityContainer>
+  <EntityType Name="LogData">
+    <Key>
+      <PropertyRef Name="AuditId" />
+    </Key>
+    <Property Name="AuditId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" />
+    <Property Name="IPAddress" Type="String" Nullable="false" />
+    <Property Name="AreaAccessed" Type="String" Nullable="false" />
+    <Property Name="Timestamp" Type="DateTime" Nullable="false" />
+    <Property Name="Browser" Type="String" Nullable="false" />
+  </EntityType>
+</Schema>

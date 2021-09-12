@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Home</h1>
+
+@if (User.IsInRole("1"))
+{
+    using (Html.BeginForm("Add", "Home", FormMethod.Post))
+    {
+        <input type="submit" class="btn btn-primary" value="Add Expense" />
+    }
+
+    <h1></h1>
+
+    using (Html.BeginForm("List", "Home", FormMethod.Post))
+    {
+        <input type="submit" class="btn btn-primary" value="List Expense " />
+    }
+}
+
+@if (User.IsInRole("2"))
+{
+    using (Html.BeginForm("Accountant", "Home", FormMethod.Post))
+    {
+        <input type="submit" class="btn btn-primary" value="Awaiting Payment" />
+    }
+}
+
+@if (User.IsInRole("3"))
+{
+    using (Html.BeginForm("Manager", "Home", FormMethod.Post))
+    {
+        <input type="submit" class="btn btn-primary" value="Awaiting Approval" />
+    }
+}
+
+
+
